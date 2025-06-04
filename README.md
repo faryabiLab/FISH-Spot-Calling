@@ -17,9 +17,9 @@ Location_03_A647_zStack.tif  Location_03_DAPI_MaxProj_cp_masks.tif
 #### Usage
 Clone this repository to your local machine:
 ```
-git clone 
+git clone https://github.com/Nuwah12/FISH-Spot-Calling.git
 ```
-Before running the pipeline, I suggest installing and activating the conda environment in the above directory - `imagingEnv.yml`. It contains all packages in correct versions needed to run it. \
+Before running the pipeline, I suggest installing and activating the conda environment defined in the .yml file `imagingEnv.yml`. It contains all packages in correct versions needed to run it. \
 To install, copy the `yml` file to your local machine and run: 
 ```
 conda env create -f imgagingEnv.yml
