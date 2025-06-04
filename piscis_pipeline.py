@@ -250,15 +250,32 @@ def _mask_count_spots(labeled_mask, points, stack):
         y = points[:, 0]
         x = points[:, 1]
 
-    # Make sure points are in bounds
+    # Ensure integer indices
+    y = y.astype(int)
+    x = x.astype(int)
+
+    # Keep points within bounds
     valid = (y >= 0) & (y < labeled_mask.shape[0]) & (x >= 0) & (x < labeled_mask.shape[1])
     y = y[valid]
     x = x[valid]
 
+    # Get region labels at spot locations
     region_ids = labeled_mask[y, x]
-    region_ids = region_ids[region_ids > 0]  # exclude background (0)
+    region_ids = region_ids[region_ids > 0]  # remove background (0)
 
-    return Counter(region_ids)  # {region_label: count}
+    # Count how many spots in each region
+    spot_counts = Counter(region_ids)
+    clean_counter = Counter({int(k): v for k, v in spot_counts.items()})
+
+    # Add zeroes for regions with no spots
+    all_regions = np.unique(labeled_mask)
+    all_regions = all_regions[all_regions > 0]  # skip background
+    for rid in all_regions:
+        if rid not in clean_counter:
+            spot_counts[rid] = 0
+
+    logger.info(f"{len(spot_counts)} total cells")
+    return spot_counts
 
 def main():
     """
@@ -296,6 +313,8 @@ def main():
 
         mask = _read_img(mask_mapping[i], imgtype)
         labeled_mask = label(mask) # give each region in the mask a unique identifier (int)
+        num_labels = len(np.unique(labeled_mask)) - (1 if 0 in labeled_mask else 0)
+        logger.info(f"{num_labels} cells in mask")
         
         logger.info(f"Image shape is {j.shape}, mask shape is {mask.shape}")
          
@@ -313,18 +332,29 @@ def main():
         
         # apply mask to called spots
         logging.info("Masking called spots.")
-        masked_spots = _mask_count_spots(mask, pred_spots, stack)
-        print(masked_spots)
+        spots_per_region = sorted(_mask_count_spots(mask, pred_spots, stack).items())
+
         # plot
+        if not Path(plot_out_dir).is_dir():
+            Path(plot_out_dir).mkdir()
         if plot_max:
             _interactive_plot(_max_proj_image(j), pred_spots, mode="max", outf=f"{plot_out_dir}/{jname}_interactivePlot_maxProj_allSpots.html")
         if plot_z:
             _interactive_plot(j, pred_spots, mode="stack", outf=f"{plot_out_dir}/{jname}_interactivePlot_zStack_allSpots.html")
         
-        # output
+        # spots per cell output
         if not Path(settings["spot_out"]).is_dir():
             Path(settings["spot_out"]).mkdir()
-        np.savetxt(f"{settings["spot_out"]}/{jname}_allCalledSpots.tsv", pred_spots, delimiter="\t")
+        with open(f"{settings["spot_out"]}/{jname}_spotsPerMaskedCell.tsv", "w") as f:
+            f.write("region_id\tcount\n")  # header
+            for region_id, count in spots_per_region:
+                f.write(f"{region_id}\t{count}\n")
       
 if __name__ == "__main__":
     main()
+
+
+#           _   
+#       .__(.)< (MEOW)
+#        \___)
+# ~~~~~~~~~~~~~~~~~~-->
