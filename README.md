@@ -43,6 +43,7 @@ The available arguments include:
 * `piscis_min_distance`: Piscis `minimum_distance` parameter
 * `model`: The (string) representing the piscis model to be used. Only change if results are not looking good.
 * `spot_channel`: The name of the channel from the above list to be used to call spots.
+* `expand_mask`: Distance in pixels to expand each mask label by. Useful when only DAPI mask is available.
 ##### Plotting
 * `plot_max`: Boolean; Make an interactive plot of all dots on the max-projected image.
 * `plot_z`: Boolean; Interactive plot of all dots on their respective Z-slices.
@@ -62,7 +63,8 @@ spot_channel: "A647"
 stack: true                   
 piscis_thresh: 1              
 piscis_scale: 1                
-piscis_min_distance: 1        
+piscis_min_distance: 1
+expand_mask: 10        
 
 model: "20230905"         
 
