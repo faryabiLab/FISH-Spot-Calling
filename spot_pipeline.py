@@ -25,10 +25,18 @@ import argparse
 import yaml
 import logging
 
-##################################################################
-##### TODO: Add option to expand masks, since DAPI is only a nuclei stain
-#####
-##################################################################
+"""
+    Wrapped version of Piscis spot calling tool. This script is designed to run like a pipeline; all images in a specified directory will be
+    analyzed in sequence. 
+
+    Arguments:
+    ---
+    settingsFile - path to yml parameter file
+
+    Output:
+    ---
+    countsPerCell - 2-column txt file [cell_id, spot_count]
+"""
 
 logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s',
                     level=logging.INFO,
