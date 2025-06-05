@@ -1,5 +1,5 @@
 ### Run Piscis in a Pipeline
-The python script `piscis_pipeline.py` will run the [piscis](https://github.com/zjniu/Piscis) spot-calling algorithm in a high-throughput manner given a dataset of smFISH microscopy images in `nd2` or `tiff` format. \
+The python script `spot_pipeline.py` will run the [piscis](https://github.com/zjniu/Piscis) spot-calling algorithm in a high-throughput manner given a dataset of smFISH microscopy images in `nd2` or `tiff` format. \
 Spots can be called on multi- or single-channel images as well as stacks of images (Z stack) or flat images. 
 
 #### File naming
