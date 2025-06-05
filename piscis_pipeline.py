@@ -10,6 +10,7 @@ import base64
 from io import BytesIO
 # masking / counting
 from skimage.measure import label
+from skimage.segmentation import expand_labels
 from collections import Counter
 # timing
 from timeit import default_timer as timer
@@ -306,6 +307,8 @@ def main():
     plot_max = settings["plot_max"]
     plot_z = settings["plot_z"]
     plot_out_dir = settings["plot_out_dir"]
+
+    expand_mask = settings["expand_mask"]
     
     mask_mapping = _pair_mask_img(img_files, mask_files)
     # Main loop
@@ -317,6 +320,9 @@ def main():
         jname = i.split("/")[len(i.split("/"))-1]
 
         mask = _read_img(mask_mapping[i], imgtype)
+        if expand_mask > 0:
+            mask = expand_labels(mask, expand_mask)
+
         labeled_mask = label(mask) # give each region in the mask a unique identifier (int)
         num_labels = len(np.unique(labeled_mask)) - (1 if 0 in labeled_mask else 0)
         logger.info(f"{num_labels} cells in mask")
