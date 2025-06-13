@@ -41,7 +41,9 @@ The available arguments include:
 * `piscis_thresh`: The `threshold` parameter for the piscis model. It should not be changed much. Check [here](https://pmc.ncbi.nlm.nih.gov/articles/PMC10862914/) for more information.
 * `piscis_scale`: Piscis `scale` parameter
 * `piscis_min_distance`: Piscis `minimum_distance` parameter
-* `model`: The (string) representing the piscis model to be used. Only change if results are not looking good.
+* `custom_model`: true/false specifying whether a custom model (file) is to be used
+* `model_dir`: The directory (not the file) containing the custom modle file.
+* `model`: The (string) representing the piscis model to be used. If using a custom model, this is the filename of that model.
 * `spot_channel`: The name of the channel from the above list to be used to call spots.
 * `expand_mask`: Distance in pixels to expand each mask label by. Useful when only DAPI mask is available.
 ##### Plotting
