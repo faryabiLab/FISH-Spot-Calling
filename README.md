@@ -64,8 +64,10 @@ stack: true
 piscis_thresh: 1              
 piscis_scale: 1                
 piscis_min_distance: 1
-expand_mask: 10        
+expand_mask: 0        
 
+custom_model: true
+model_dir: "/path/to/model/dir"
 model: "20230905"         
 
 plot_max: true             
