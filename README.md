@@ -25,6 +25,8 @@ To install, copy the `yml` file to your local machine and run:
 conda env create -f imgagingEnv.yml
 conda activate bigfish
 ```
+**INTERNAL USE ONLY:** If you are running this on `simurgh`, this environment already exists and can be activated with `conda activate /home/noah/.conda/envs/bigfish` \
+\
 To execute the pipeline, run
 ```
 python3 piscis_pipeline.py [-h] settings.yml
