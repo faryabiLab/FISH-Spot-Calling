@@ -2,6 +2,7 @@
 import os
 import re
 from pathlib import Path
+import shutil
 import numpy as np
 # plotting
 import plotly.graph_objects as go
@@ -306,7 +307,13 @@ def main():
     mask_dir = settings["mask_dir"]
     mask_files = [os.path.join(mask_dir, f) for f in os.listdir(mask_dir)]
 
+    if settings["custom_model"]:
+        target_dir = piscis.paths.MODELS_DIR / settings["model"]
+        target_dir.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(Path(settings["model_dir"])/settings["model"], target_dir)
+        print(f"Moved model at {settings["model_dir"]}/{settings["model"]} to {target_dir}")
     model = piscis.Piscis(model_name=settings["model"]) # make piscis obj to reuse
+
     stack = settings["stack"]
     threshold = settings["piscis_thresh"] # piscis threshold parameter
     scale = settings["piscis_scale"]
@@ -336,7 +343,7 @@ def main():
         logger.info(f"{num_labels} cells in mask")
         
         logger.info(f"Image shape is {j.shape}, mask shape is {mask.shape}")
-         
+        
         if len(channels) > 1: # if there is more than one channel, subset the image with the one we want 
             channelDim = _get_channel_dim(j, len(channels)) # guesstimate the channel dimension
             channelIdx = channels.index(callChannel) # get the index of the spot calling channel
@@ -368,6 +375,14 @@ def main():
             f.write("region_id\tcount\n")  # header
             for region_id, count in spots_per_region:
                 f.write(f"{region_id}\t{count}\n")
+
+        # spots xyz output
+        with open(f"{settings["spot_out"]}/{jname}_allSpots_XYZ.tsv", "w") as f:
+            f.write("x\ty\tz\n") # header
+            for z, y, x in pred_spots:
+                f.write(f"{x}\t{y}\t{z}\n")
+
+    logger.info("Done. Have a nice day.")
       
 if __name__ == "__main__":
     main()
