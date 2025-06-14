@@ -1,11 +1,11 @@
-image_dir: "/mnt/data0/noah/analysis/FISH-Spot-Calling/test_imgs"     # Path to directory holding images
-mask_dir: "/mnt/data0/noah/analysis/FISH/Granta519/mask"                         # path to the directory of masked cell images. ***It is assumed there is a one-to-one correspondence between data and masks!!!***
-image_type: "tiff"                    # Image filetype (nd2 or tiff/tif)
-spot_out: "./Granta_spots_count_xyz"                  # output directory for spots
+image_dir: ""     # Path to directory holding images
+mask_dir: ""                         # path to the directory of masked cell images. ***It is assumed there is a one-to-one correspondence between data and masks!!!***
+image_type: ""                    # Image filetype (nd2 or tiff/tif)
+spot_out: ""                  # output directory for spots
 
 channels:                            # channels included in images (in order, 0th, 1st, 2nd, etc)
- - "A647"
-spot_channel: "A647"                 # name of channel to call spots on (i.e. "Cy3")
+ - ""
+spot_channel: ""                 # name of channel to call spots on (i.e. "Cy3")
 stack: true                          # true if the image is a stack (Z stack), false otherwise 
 piscis_thresh: 1                     # piscis spot calling threshold - make only small changes to this value [0..1]
 piscis_scale: 1                      # piscis scale param
@@ -13,10 +13,10 @@ piscis_min_distance: 1               # piscis minimum distance param
 expand_mask: 0                     # pixel amount to expand all masks by
 
 custom_model: true
-model_dir: "/mnt/data0/noah/analysis/FISH-Spot-Calling"
-model: "250609_Granta519_MYC_exon_model.model"                    #  name of the piscis model to use for spot calling
+model_dir: ""
+model: "l"                    #  name of the piscis model to use for spot calling
 
 plot_max: true                       # plot all dots on each z stack independently
 plot_z: true                         # plot all dots on their respective z levels        
-plot_out_dir: "./test_plots"                    # output directory for plots
+plot_out_dir: "./plots"                    # output directory for plots
 
