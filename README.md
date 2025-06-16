@@ -78,3 +78,14 @@ plot_max: true
 plot_z: true                    
 plot_out_dir: "."        
 ```
+#### Output
+Upon successful completion, the pipeline will output 2 files per processed image file in the specified output directory `spot_out`. \
+* Spots per cell
+* Indiviual spot coordinates (x,y,z)
+#### Visualization
+Two types of plots are generated if the user specifies so: a max-projected version of the image with all spots from all z-stack layers superimposed (`plot_max`), and a series of seperate z-stack images with their respective spots superimposed (`plot_z`). \
+##### Max-projected plot
+![image](https://github.com/user-attachments/assets/5daad508-fa36-4fc9-a32a-6f56a00aa165)
+
+##### Z-stack plot
+![image](https://github.com/user-attachments/assets/06de645e-aeb4-44ca-9fd8-a52336c84140)
