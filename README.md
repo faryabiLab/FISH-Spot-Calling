@@ -1,7 +1,8 @@
 ### Run Piscis in a Pipeline
-The python script `spot_pipeline.py` will run the [piscis](https://github.com/zjniu/Piscis) spot-calling algorithm in a high-throughput manner given a dataset of smFISH microscopy images in `nd2` or `tiff` format. \
+The python script `spot_pipeline.py` wraps the [piscis](https://github.com/zjniu/Piscis) spot-calling algorithm to allow for high-throughput analysis of smFISH microscopy images in `nd2` or `tiff` format. \
 Spots can be called on multi- or single-channel images as well as stacks of images (Z stack) or flat images. 
 
+### Setup
 #### File naming
 The pipeline expects both image and mask files to contain the prefix `Location_XX_`, i.e. `Location_01_`, `Location_02_`, etc. The numbers need not be increasing or in numerical order, but this prefix **_must_** match between image files and their corresponding mask files. \
 Example:
@@ -13,20 +14,19 @@ Location_02_A647_zStack.tif  Location_02_DAPI_MaxProj_cp_masks.tif
 Location_03_A647_zStack.tif  Location_03_DAPI_MaxProj_cp_masks.tif
 ...
 ```
-
-#### Usage
 Clone this repository to your local machine:
 ```
 git clone https://github.com/Nuwah12/FISH-Spot-Calling.git
 ```
+#### Dependencies 
 Before running the pipeline, I suggest installing and activating the conda environment defined in the .yml file `imagingEnv.yml`. It contains all packages in correct versions needed to run it. \
 To install, copy the `yml` file to your local machine and run: 
 ```
 conda env create -f imgagingEnv.yml
 conda activate bigfish
 ```
-**INTERNAL USE ONLY:** If you are running this on `simurgh`, this environment already exists and can be activated with `conda activate /home/noah/.conda/envs/bigfish` \
-\
+
+### Usage
 To execute the pipeline, run
 ```
 python3 piscis_pipeline.py [-h] settings.yml
@@ -78,11 +78,11 @@ plot_max: true
 plot_z: true                    
 plot_out_dir: "."        
 ```
-#### Output
+### Output
 Upon successful completion, the pipeline will output 2 files per processed image file in the specified output directory `spot_out`. \
 * Spots per cell
 * Indiviual spot coordinates (x,y,z)
-#### Visualization
+### Visualization
 Two types of plots are generated if the user specifies so: a max-projected version of the image with all spots from all z-stack layers superimposed (`plot_max`), and a series of seperate z-stack images with their respective spots superimposed (`plot_z`). \
 ##### Max-projected plot
 ![image](https://github.com/user-attachments/assets/5daad508-fa36-4fc9-a32a-6f56a00aa165)
