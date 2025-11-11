@@ -26,7 +26,7 @@ conda env create -f imgagingEnv.yml
 conda activate bigfish
 ```
 ## Run Example _(Internal Use Only)_
-To verify that everything is installed and working correctly, the `settings.yml` file is set up to work with image and mask files on `simurgh` at `/mnt/data0/noah/analysis/FISH-Spot-Calling/test_imgs` and `/mnt/data0/noah/analysis/FISH-Spot-Calling/test_imgs`. To test, run
+To verify that everything is installed and working correctly, the `settings.yml` file is set up to work with image and mask files on `simurgh` at `/mnt/data0/noah/analysis/FISH-Spot-Calling/test_imgs` and `/mnt/data0/noah/analysis/FISH/Granta519/mask` respectively. To test, run
 ```
 python3 piscis_pipeline.py settings.yml
 ```
