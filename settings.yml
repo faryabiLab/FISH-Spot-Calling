@@ -1,5 +1,5 @@
-image_dir: "./example/img"     # Path to directory holding images
-mask_dir: "./example/mask"                         # path to the directory of masked cell images. ***It is assumed there is a one-to-one correspondence between data and masks!!!***
+image_dir: "/mnt/data0/noah/analysis/FISH-Spot-Calling/test_imgs"     # Path to directory holding images
+mask_dir: "/mnt/data0/noah/analysis/FISH/Granta519/mask"                         # path to the directory of masked cell images. ***It is assumed there is a one-to-one correspondence between data and masks!!!***
 image_type: "tiff"                    # Image filetype (nd2 or tiff/tif)
 spot_out: "./test_spot_out"                  # output directory for spots
 
@@ -12,9 +12,9 @@ piscis_scale: 1                      # piscis scale param
 piscis_min_distance: 1               # piscis minimum distance param
 expand_mask: 0                     # pixel amount to expand all masks by
 
-custom_model: false
-model_dir: ""
-model: "20230905"                    #  name of the piscis model to use for spot calling
+custom_model: false                  # true if using a custom model file, false otherwise
+model_dir: ""                        # Path to the *directory*, not file, holding the model. Empty string if using built in model
+model: "20230905"                    #  name of the piscis model to use for spot calling (if custom, this is the file name"
 
 plot_max: true                       # plot all dots on each z stack independently
 plot_z: true                         # plot all dots on their respective z levels        
