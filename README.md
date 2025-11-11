@@ -25,6 +25,17 @@ To install, copy the `yml` file to your local machine and run:
 conda env create -f imgagingEnv.yml
 conda activate bigfish
 ```
+### Run Example
+To verify that everything is installed and working correctly, there are test data image and mask files in `examples/`. The `settings.yml` is set up to run with these images and masks - after instealling the environment, run
+```
+python3 piscis_pipeline.py settings.yml
+```
+The workflow will start with messages like
+```
+INFO:2025-11-11 10:58:50,803:jax._src.xla_bridge:822: Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+2025-11-11 10:58:50 INFO     Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+```
+These are warnings and can be ignored. If there is no `jax` warning claiming that a GPU cannot be found, the pipeline is GPU accelerated. Confirm with `nvidia-smi` for NVIDIA GPUs.
 
 ### Usage
 To execute the pipeline, run
