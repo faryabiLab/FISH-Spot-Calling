@@ -2,7 +2,7 @@
 The python script `spot_pipeline.py` wraps the [piscis](https://github.com/zjniu/Piscis) spot-calling algorithm to allow for high-throughput analysis of smFISH microscopy images in `nd2` or `tiff` format. \
 Spots can be called on multi- or single-channel images as well as stacks of images (Z stack) or flat images. 
 
-### Setup
+## Setup
 #### File naming
 The pipeline expects both image and mask files to contain the prefix `Location_XX_`, i.e. `Location_01_`, `Location_02_`, etc. The numbers need not be increasing or in numerical order, but this prefix **_must_** match between image files and their corresponding mask files. \
 Example:
@@ -25,8 +25,8 @@ To install, copy the `yml` file to your local machine and run:
 conda env create -f imgagingEnv.yml
 conda activate bigfish
 ```
-### Run Example
-To verify that everything is installed and working correctly, there are test data image and mask files in `examples/`. The `settings.yml` is set up to run with these images and masks - after instealling the environment, run
+## Run Example _(Internal Use Only)_
+To verify that everything is installed and working correctly, the `settings.yml` file is set up to work with image and mask files on `simurgh` at `/mnt/data0/noah/analysis/FISH-Spot-Calling/test_imgs` and `/mnt/data0/noah/analysis/FISH-Spot-Calling/test_imgs`. To test, run
 ```
 python3 piscis_pipeline.py settings.yml
 ```
@@ -37,7 +37,7 @@ INFO:2025-11-11 10:58:50,803:jax._src.xla_bridge:822: Unable to initialize backe
 ```
 These are warnings and can be ignored. If there is no `jax` warning claiming that a GPU cannot be found, the pipeline is GPU accelerated. Confirm with `nvidia-smi` for NVIDIA GPUs.
 
-### Usage
+## Usage
 To execute the pipeline, run
 ```
 python3 piscis_pipeline.py [-h] settings.yml
